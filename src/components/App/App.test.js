@@ -2,12 +2,17 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import App from './App';
 
-it('renders without crashing', () => {
-  shallow(<App />);
-});
+describe('App component', () => {
 
-it('finds css modules classes', () => {
-  const app = shallow(<App />);
-  const res = app.find('.container');
-  expect(res.text()).toContain('React App');
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = shallow(<App />);
+  });
+
+  it('renders without crashing', () => {
+    expect(wrapper.exists()).toEqual(true);
+  });
+
+  it('contains pokemons list', () => {});
 });
