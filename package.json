@@ -106,5 +106,9 @@
       }
     }
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "node-sass": "^4.9.3",
+    "react-hot-loader": "^4.3.11",
+    "sass-loader": "^7.1.0"
+  }
 }
