@@ -1,4 +1,4 @@
-import reducer, { pokemons, hasFailed, isLoading, initialState } from './reducer';
+import reducer, { items, hasFailed, isLoading, initialState } from './reducer';
 import { createList, itemsIsLoading, itemsHasErrored } from './actions';
 import mock from './mock.data.json';
 
@@ -16,6 +16,6 @@ describe('Pokemon list reducer', () => {
   });
 
   it('should handle ADD_POKEMON_LIST', () => {
-    expect(pokemons([], createList(mock))).toEqual(mock);
+    expect(items([], createList(mock))).toEqual(mock);
   });
 });

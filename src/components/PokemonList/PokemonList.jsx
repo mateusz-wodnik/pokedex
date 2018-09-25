@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from './actions';
-import mock from './mock.data.json';
 import styles from './PokemonList.sass';
 import PokemonItem from './components/Item/Item';
 
 
-class PokemonList extends Component {
+export class PokemonList extends Component {
   componentDidMount() {
     const { getListRequest } = this.props;
     getListRequest();
@@ -26,15 +25,17 @@ class PokemonList extends Component {
 }
 
 PokemonList.defaultProps = {
-  items: mock || [],
+  items: [],
+  getListRequest: () => [],
 };
 
 PokemonList.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
+  getListRequest: PropTypes.func,
 };
 
 function mapStateToProps(state) {
-  return { ...state };
+  return { ...state.pokemons };
 }
 
 export default connect(mapStateToProps, { ...actions })(PokemonList);

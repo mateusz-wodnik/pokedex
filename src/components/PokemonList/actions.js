@@ -2,9 +2,9 @@ export const ADD_POKEMON_LIST = 'ADD_POKEMON_LIST';
 export const FAILED_POKEMON_LIST = 'FAILED_POKEMON_LIST';
 export const LOADING_POKEMON_LIST = 'LOADING_POKEMON_LIST';
 
-export const createList = pokemons => ({
+export const createList = items => ({
   type: ADD_POKEMON_LIST,
-  pokemons,
+  items,
 });
 
 export const itemsHasErrored = bool => ({
@@ -20,7 +20,7 @@ export const itemsIsLoading = bool => ({
 export function getListRequest(query = '') {
   return (dispatch) => {
     dispatch(itemsIsLoading(true));
-    return fetch(`/pokemon${query}`)
+    return fetch(`/pokemons${query}`)
       .then((res) => {
         if (!res.ok) throw Error(res.statusText);
         dispatch(itemsIsLoading(false));

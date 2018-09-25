@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import App from './App';
+import PokemonList from '../PokemonList/PokemonList';
 
 describe('App component', () => {
 
@@ -15,6 +16,6 @@ describe('App component', () => {
   });
 
   it('contains pokemons list', () => {
-    expect(wrapper.find('PokemonList')).toHaveLength(1);
+    expect(wrapper.contains(<PokemonList />)).toEqual(true);
   });
 });

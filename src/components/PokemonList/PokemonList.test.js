@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import PokemonList from './PokemonList';
+import { PokemonList } from './PokemonList';
 import mock from './mock.data.json';
 
 describe('Pokemon list component', () => {
