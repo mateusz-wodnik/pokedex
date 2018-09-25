@@ -10,6 +10,7 @@ const PokemonItem = ({
   num,
   name,
   type,
+  children,
 }) => (
   <li id={id} className={`${styles.container} ${bs.card}`}>
     <img className={`${styles.img} ${bs['card-img-top']}`} src={img} alt={name} />
@@ -18,6 +19,9 @@ const PokemonItem = ({
       <ul className={styles.types}>
         {type.map(item => <Type key={item} type={item} />)}
       </ul>
+    </div>
+    <div className={bs['card-footer']}>
+      {children}
     </div>
   </li>
 );
@@ -28,6 +32,7 @@ PokemonItem.defaultProps = {
   num: 'No number',
   name: 'No name',
   type: [],
+  children: null,
 };
 
 PokemonItem.propTypes = {
@@ -36,6 +41,7 @@ PokemonItem.propTypes = {
   num: PropTypes.string,
   name: PropTypes.string,
   type: PropTypes.arrayOf(PropTypes.string),
+  children: PropTypes.node,
 };
 
 export default PokemonItem;
