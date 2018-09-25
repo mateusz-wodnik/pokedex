@@ -1,6 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { ADD_POKEMON_LIST, LOADING_POKEMON_LIST, getListRequest } from './actions';
+import { createList, itemsIsLoading, getListRequest } from './actions';
 import mock from './mock.data.json';
 
 const middlewares = [thunk];
@@ -16,9 +16,9 @@ describe('async actions', () => {
     fetch.once(JSON.stringify(mock));
 
     const expectedActions = [
-      { type: LOADING_POKEMON_LIST, isLoading: true },
-      { type: LOADING_POKEMON_LIST, isLoading: false },
-      { type: ADD_POKEMON_LIST, pokemons: mock },
+      itemsIsLoading(true),
+      itemsIsLoading(false),
+      createList(mock),
     ];
 
     const store = mockStore({});
