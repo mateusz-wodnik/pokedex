@@ -23,7 +23,7 @@ const PokemonItem = ({
 );
 
 PokemonItem.defaultProps = {
-  id: 'No id',
+  id: null,
   img: '/placeholder.jpg',
   num: 'No number',
   name: 'No name',
