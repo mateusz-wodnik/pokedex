@@ -26,7 +26,7 @@ export class PokemonList extends Component {
       if (modal) {
         const pokemon = items.find(item => item.id === modal);
         return (
-          <Modal hideModal={hideModal}>
+          <Modal hideModal={hideModal} link={`/#${modal}`}>
             <PokemonItem {...pokemon} handleModal={hideModal}>
               <Info {...pokemon} />
             </PokemonItem>

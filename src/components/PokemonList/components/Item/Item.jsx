@@ -14,14 +14,14 @@ const PokemonItem = ({
   handleModal,
 }) => (
   <li id={id} className={`${styles.container} ${bs.card}`}>
-    <a href={children ? '/#' : `#${name}`} className={styles.img} onClick={() => handleModal(id)}>
+    <a href={`/#${id}`} className={styles.img} onClick={() => handleModal(id)}>
       <img className={`${bs['card-img-top']}`} src={img} alt={name} />
     </a>
     <div className={`${styles.body} ${bs['card-body']}`}>
       <h5 className={`${styles.title} ${bs['card-title']}`}>{`#${num} ${name}`}</h5>
-      <ul className={styles.types}>
+      <div className={styles.types}>
         {type.map(item => <Type key={item} type={item} />)}
-      </ul>
+      </div>
     </div>
     {children && (
       <div className={bs['card-footer']}>

@@ -78,7 +78,7 @@ const Info = ({
       <p>
         Weakness
         {' '}
-        {weaknesses.map(weakness => <Type key={weakness} type={weakness} style={{ marginLeft: 'auto' }} />)}
+        {weaknesses.map(weakness => <Type key={weakness} type={weakness} />)}
       </p>
     </div>
     <div className={bs['list-group-item']}>
