@@ -70,7 +70,7 @@ const Info = ({
       <p>
         Multipliers
         {multipliers && multipliers.map(multiplier => (
-          <span className={bs.badge}>{multiplier}</span>
+          <span key={multiplier} className={`${bs.badge} ${bs['badge-info']}`}>{multiplier}</span>
         ))}
       </p>
     </div>
@@ -78,13 +78,13 @@ const Info = ({
       <p>
         Weakness
         {' '}
-        {weaknesses.map(weakness => <Type type={weakness} />)}
+        {weaknesses.map(weakness => <Type key={weakness} type={weakness} />)}
       </p>
     </div>
     <div className={bs['list-group-item']}>
       <h6>Evolution</h6>
       {nextEvolution.map(evolution => (
-        <span className={bs.badge}>
+        <span key={evolution.name} className={bs.badge}>
           #
           {evolution.num}
           {' '}
@@ -119,7 +119,7 @@ Info.propTypes = {
   avg_spawns: PropTypes.number,
   spawn_time: PropTypes.string,
   multipliers: PropTypes.arrayOf(PropTypes.number),
-  weaknesses: PropTypes.arrayOf(PropTypes.object),
+  weaknesses: PropTypes.arrayOf(PropTypes.string),
   next_evolution: PropTypes.arrayOf(PropTypes.object),
 };
 

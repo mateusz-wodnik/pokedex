@@ -1,5 +1,5 @@
 import reducer, { items, hasFailed, isLoading, initialState, modal } from './reducer';
-import { createList, itemsIsLoading, itemsHasErrored, toggleModal } from './actions';
+import { createList, itemsIsLoading, itemsHasErrored, showModal, hideModal } from './actions';
 import mock from './mock.data.json';
 
 describe('Pokemon list reducer', () => {
@@ -20,10 +20,10 @@ describe('Pokemon list reducer', () => {
   });
 
   it('should show modal', () => {
-    expect(modal([], toggleModal(true))).toEqual(true);
+    expect(modal([], showModal(1))).toEqual(1);
   });
 
   it('should hide modal', () => {
-    expect(modal([], toggleModal(false))).toEqual(false);
+    expect(modal([], hideModal())).toEqual(null);
   });
 });
