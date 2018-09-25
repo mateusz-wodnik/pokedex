@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import bs from 'bootstrap/dist/css/bootstrap.min.css';
+import mock from './mock.data.json';
 import styles from './PokemonList.sass';
 import PokemonItem from './components/Item/Item';
 
@@ -12,7 +13,7 @@ const PokemonList = ({ items }) => (
 );
 
 PokemonList.defaultProps = {
-  items: [],
+  items: mock,
 };
 
 PokemonList.propTypes = {

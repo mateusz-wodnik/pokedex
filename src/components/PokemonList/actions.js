@@ -2,17 +2,17 @@ export const ADD_POKEMON_LIST = 'ADD_POKEMON_LIST';
 export const FAILED_POKEMON_LIST = 'FAILED_POKEMON_LIST';
 export const LOADING_POKEMON_LIST = 'LOADING_POKEMON_LIST';
 
-export const createList = (pokemons) => ({
+export const createList = pokemons => ({
   type: ADD_POKEMON_LIST,
   pokemons,
 });
 
-export const itemsHasErrored = (bool) => ({
+export const itemsHasErrored = bool => ({
   type: FAILED_POKEMON_LIST,
   hasFailed: bool,
 });
 
-export const itemsIsLoading = (bool) => ({
+export const itemsIsLoading = bool => ({
   type: LOADING_POKEMON_LIST,
   isLoading: bool,
 });

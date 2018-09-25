@@ -11,11 +11,11 @@ const PokemonItem = ({
   name,
   type,
 }) => (
-  <li className={`${styles.container} ${bs.card}`}>
+  <li id={id} className={`${styles.container} ${bs.card}`}>
     <img className={bs['card-img-top']} src={img} alt={name} />
     <div className={bs['card-body']}>
       <h2 className={bs['card-title']}>{`#${num} ${name}`}</h2>
-      <ul className={styles.types}></ul>
+      <ul className={styles.types} data-type={type} />
     </div>
   </li>
 );
