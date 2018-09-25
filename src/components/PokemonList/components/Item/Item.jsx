@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import bs from 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './Item.sass';
-
+import Type from '../../../shared/Type/Type';
 
 const PokemonItem = ({
   id,
@@ -12,10 +12,12 @@ const PokemonItem = ({
   type,
 }) => (
   <li id={id} className={`${styles.container} ${bs.card}`}>
-    <img className={bs['card-img-top']} src={img} alt={name} />
-    <div className={bs['card-body']}>
-      <h5 className={bs['card-title']}>{`#${num} ${name}`}</h5>
-      <ul className={styles.types} data-type={type} />
+    <img className={`${styles.img} ${bs['card-img-top']}`} src={img} alt={name} />
+    <div className={`${styles.body} ${bs['card-body']}`}>
+      <h5 className={`${styles.title} ${bs['card-title']}`}>{`#${num} ${name}`}</h5>
+      <ul className={styles.types}>
+        {type.map(item => <Type type={item} />)}
+      </ul>
     </div>
   </li>
 );
