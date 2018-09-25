@@ -67,19 +67,19 @@ const Info = ({
       </div>
     </div>
     <div className={bs['list-group-item']}>
-      <h6>
-        Multipliers:
+      <p>
+        Multipliers
         {multipliers && multipliers.map(multiplier => (
           <span className={bs.badge}>{multiplier}</span>
         ))}
-      </h6>
+      </p>
     </div>
     <div className={bs['list-group-item']}>
-      <h6>
+      <p>
         Weakness
         {' '}
         {weaknesses.map(weakness => <Type type={weakness} />)}
-      </h6>
+      </p>
     </div>
     <div className={bs['list-group-item']}>
       <h6>Evolution</h6>

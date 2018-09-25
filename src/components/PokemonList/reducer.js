@@ -4,7 +4,8 @@ import {
   ADD_POKEMON_LIST,
   LOADING_POKEMON_LIST,
   FAILED_POKEMON_LIST,
-  TOGGLE_MODAL,
+  SHOW_MODAL,
+  HIDE_MODAL,
 } from './actions';
 
 
@@ -47,8 +48,11 @@ export function isLoading(state = initialState.isLoading, action) {
 
 export function modal(state = initialState.modal, action) {
   switch (action.type) {
-    case TOGGLE_MODAL:
-      return action.show;
+    case SHOW_MODAL:
+      return action.id;
+
+    case HIDE_MODAL:
+      return null;
 
     default:
       return state;

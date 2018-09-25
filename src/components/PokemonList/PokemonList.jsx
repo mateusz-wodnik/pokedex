@@ -5,6 +5,7 @@ import * as actions from './actions';
 import styles from './PokemonList.sass';
 import PokemonItem from './components/Item/Item';
 import Modal from '../shared/Modal/Modal';
+import Info from './components/Info/Info';
 
 
 export class PokemonList extends Component {
@@ -14,17 +15,35 @@ export class PokemonList extends Component {
   }
 
   render() {
-    const { items } = this.props;
+    const {
+      items,
+      modal,
+      showModal,
+      hideModal,
+    } = this.props;
+
+    const handleModal = () => {
+      if (modal) {
+        const pokemon = items.find(item => item.id === modal);
+        return (
+          <Modal>
+            <PokemonItem {...pokemon} handleModal={hideModal}>
+              <Info {...pokemon} />
+            </PokemonItem>
+          </Modal>
+        );
+      }
+      return null;
+    };
+
     return (
       <Fragment>
         <ul className={`${styles.container}`}>
           {items.map(item => (
-            <PokemonItem key={item.id + item.name} {...item} />
+            <PokemonItem key={item.id + item.name} {...item} handleModal={showModal} />
           ))}
         </ul>
-        <Modal>
-          Modal
-        </Modal>
+        {handleModal()}
       </Fragment>
     );
   }

@@ -1,7 +1,8 @@
 export const ADD_POKEMON_LIST = 'ADD_POKEMON_LIST';
 export const FAILED_POKEMON_LIST = 'FAILED_POKEMON_LIST';
 export const LOADING_POKEMON_LIST = 'LOADING_POKEMON_LIST';
-export const TOGGLE_MODAL = 'TOGGLE_MODAL';
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';
 
 export const createList = items => ({
   type: ADD_POKEMON_LIST,
@@ -32,7 +33,11 @@ export function getListRequest(query = '') {
   };
 }
 
-export const toggleModal = show => ({
-  type: TOGGLE_MODAL,
-  show,
+export const showModal = id => ({
+  type: SHOW_MODAL,
+  id,
+});
+
+export const hideModal = () => ({
+  type: HIDE_MODAL,
 });
