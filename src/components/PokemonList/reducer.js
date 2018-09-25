@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
+
 import {
   ADD_POKEMON_LIST,
   LOADING_POKEMON_LIST,
   FAILED_POKEMON_LIST,
   TOGGLE_MODAL,
 } from './actions';
+
 
 export const initialState = {
   items: [],
