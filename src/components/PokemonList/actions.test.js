@@ -1,7 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import * as actions from './actions';
-import fetchMock from 'fetch-mock';​
+import { ADD_POKEMON_LIST, LOADING_POKEMON_LIST, getListRequest } from './actions';
 import mock from './mock.data.json';
 
 const middlewares = [thunk];
@@ -9,24 +8,25 @@ const mockStore = configureMockStore(middlewares);
 
 describe('async actions', () => {
   afterEach(() => {
-    fetchMock.reset();
-    fetchMock.restore();
+    fetch.resetMocks();
   });
 
   it('creates ADD_POKEMON_LIST when fetching todos has been done', () => {
-    fetchMock.getOnce('/pokemon', { body: mock, headers: { 'content-type': 'application/json' } })​​
+
+    fetch.once(JSON.stringify(mock));
 
     const expectedActions = [
-      { type: actions.GET_LIST_LOADING, isLoading: true },
-      { type: actions.GET_LIST_LOADING, isLoading: false },
-      { type: actions.ADD_POKEMON_LIST, body: mock  },
+      { type: LOADING_POKEMON_LIST, isLoading: true },
+      { type: LOADING_POKEMON_LIST, isLoading: false },
+      { type: ADD_POKEMON_LIST, pokemons: mock },
     ];
 
-    const store = mockStore(mock);
+    const store = mockStore({});
 
-    return store.dispatch(actions.fetchTodos()).then(() => {
-      // return of async actions
-      expect(store.getActions()).toEqual(expectedActions)
-    })
-  })
+    return (
+      store.dispatch(getListRequest()).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      })
+    );
+  });
 });

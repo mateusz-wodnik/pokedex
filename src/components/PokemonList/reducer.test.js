@@ -1,33 +1,21 @@
-import reducer from './reducer';
-import * as actions from './actions';
+import reducer, { pokemons, hasFailed, isLoading, initialState } from './reducer';
+import { createList, itemsIsLoading, itemsHasErrored } from './actions';
 import mock from './mock.data.json';
 
 describe('Pokemon list reducer', () => {
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual([]);
+    expect(reducer(undefined, {})).toEqual(initialState);
   });
 
-  it('should handle GET_LIST_LOADING', () => {
-    const action = {
-      type: actions.GET_LIST_LOADING,
-      isLoading: true,
-    };
-    expect(reducer([], action)).toEqual(true);
+  it('should handle LOADING_POKEMON_LIST', () => {
+    expect(isLoading([], itemsIsLoading(true))).toEqual(true);
   });
 
-  it('should handle GET_LIST_FAILED', () => {
-    const action = {
-      type: actions.GET_LIST_FAILED,
-      isLoading: true,
-    };
-    expect(reducer([], action)).toEqual(true);
+  it('should handle FAILED_POKEMON_LIST', () => {
+    expect(hasFailed([], itemsHasErrored(true))).toEqual(true);
   });
 
   it('should handle ADD_POKEMON_LIST', () => {
-    const action = {
-      type: actions.ADD_POKEMON_LIST,
-      list: mock.list,
-    };
-    expect(reducer([], action)).toEqual(mock.list);
+    expect(pokemons([], createList(mock))).toEqual(mock);
   });
 });
