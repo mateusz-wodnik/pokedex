@@ -11,10 +11,10 @@ describe('App component', () => {
   });
 
   it('renders without crashing', () => {
-    expect(wrapper.exists()).to.equal(true);
+    expect(wrapper.exists()).toEqual(true);
   });
 
   it('contains pokemons list', () => {
-    expect(wrapper.find('PokemonList')).to.equal(true);
+    expect(wrapper.find('PokemonList')).toHaveLength(1);
   });
 });

@@ -16,7 +16,7 @@ const PokemonItem = ({
     <div className={`${styles.body} ${bs['card-body']}`}>
       <h5 className={`${styles.title} ${bs['card-title']}`}>{`#${num} ${name}`}</h5>
       <ul className={styles.types}>
-        {type.map(item => <Type type={item} />)}
+        {type.map(item => <Type key={item} type={item} />)}
       </ul>
     </div>
   </li>
@@ -31,11 +31,11 @@ PokemonItem.defaultProps = {
 };
 
 PokemonItem.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.number,
   img: PropTypes.string,
   num: PropTypes.string,
   name: PropTypes.string,
-  type: PropTypes.arrayOf(PropTypes.object),
+  type: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default PokemonItem;
