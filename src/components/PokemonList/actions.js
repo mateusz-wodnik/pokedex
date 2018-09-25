@@ -1,6 +1,7 @@
 export const ADD_POKEMON_LIST = 'ADD_POKEMON_LIST';
 export const FAILED_POKEMON_LIST = 'FAILED_POKEMON_LIST';
 export const LOADING_POKEMON_LIST = 'LOADING_POKEMON_LIST';
+export const TOGGLE_MODAL = 'TOGGLE_MODAL';
 
 export const createList = items => ({
   type: ADD_POKEMON_LIST,
@@ -30,3 +31,8 @@ export function getListRequest(query = '') {
       .catch(() => dispatch(itemsHasErrored(true)));
   };
 }
+
+export const toggleModal = show => ({
+  type: TOGGLE_MODAL,
+  show,
+});

@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
-import { ADD_POKEMON_LIST, LOADING_POKEMON_LIST, FAILED_POKEMON_LIST } from './actions';
+import { ADD_POKEMON_LIST, LOADING_POKEMON_LIST, FAILED_POKEMON_LIST, TOGGLE_MODAL } from './actions';
 
 export const initialState = {
   items: [],
   hasFailed: false,
   isLoading: false,
+  modal: false,
 };
 
 export function items(state = initialState.items, action) {
@@ -37,8 +38,19 @@ export function isLoading(state = initialState.isLoading, action) {
   }
 }
 
+export function modal(state = initialState.modal, action) {
+  switch (action.type) {
+    case TOGGLE_MODAL:
+      return action.show;
+
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   items,
   hasFailed,
   isLoading,
+  modal,
 });
