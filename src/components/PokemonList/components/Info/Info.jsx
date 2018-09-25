@@ -17,7 +17,7 @@ const Info = ({
   weaknesses,
   next_evolution: nextEvolution,
 }) => (
-  <section className={bs['list-group']}>
+  <section className={`${bs['list-group']} ${styles.container}`}>
     <div className={bs['list-group-item']}>
       <p>
         Height
@@ -78,7 +78,7 @@ const Info = ({
       <p>
         Weakness
         {' '}
-        {weaknesses.map(weakness => <Type key={weakness} type={weakness} />)}
+        {weaknesses.map(weakness => <Type key={weakness} type={weakness} style={{ marginLeft: 'auto' }} />)}
       </p>
     </div>
     <div className={bs['list-group-item']}>
