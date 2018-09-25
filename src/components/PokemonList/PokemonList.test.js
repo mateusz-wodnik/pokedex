@@ -1,28 +1,26 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import PokemonList from './PokemonList';
+import mock from './mock.data.json';
 
 describe('Pokemon list component', () => {
-  const items = [];
+  const items = mock;
   let wrapper;
-
-  it('is empty if props is not provided', () => {
-    expect(wrapper.isEmpty()).toEqual(true);
-  });
 
   beforeEach(() => {
     wrapper = shallow(<PokemonList items={items} />);
+  });
+
+  it('is empty if props is not provided', () => {
+    wrapper = shallow(<PokemonList />);
+    expect(wrapper.exists('PokemonItem')).toEqual(false);
   });
 
   it('renders without crashing', () => {
     expect(wrapper.exists()).toEqual(true);
   });
 
-  it('contains pokemons list', () => {
-    expect(wrapper).toHaveLength(items.length);
-  });
-
-  it('contains pokemon items', () => {
-    expect(wrapper.contains('Pokemon')).toEqual(true);
+  it('contains right number of pokemon items', () => {
+    expect(wrapper.find('PokemonItem')).toHaveLength(items.length);
   });
 });
