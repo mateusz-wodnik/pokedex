@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from './actions';
 import styles from './PokemonList.sass';
 import PokemonItem from './components/Item/Item';
+import Modal from '../shared/Modal/Modal';
 
 
 export class PokemonList extends Component {
@@ -15,11 +16,16 @@ export class PokemonList extends Component {
   render() {
     const { items } = this.props;
     return (
-      <ul className={`${styles.container}`}>
-        {items.map(item => (
-          <PokemonItem key={item.id + item.name} {...item} />
-        ))}
-      </ul>
+      <Fragment>
+        <ul className={`${styles.container}`}>
+          {items.map(item => (
+            <PokemonItem key={item.id + item.name} {...item} />
+          ))}
+        </ul>
+        <Modal>
+          Modal
+        </Modal>
+      </Fragment>
     );
   }
 }
