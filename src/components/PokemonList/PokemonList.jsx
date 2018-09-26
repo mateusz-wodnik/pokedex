@@ -30,7 +30,7 @@ export class PokemonList extends Component {
       isLoading,
     } = this.props;
     return (
-      <main>
+      <main className={styles.container}>
         <Pagination
           pages={pages}
           page={page}
@@ -38,7 +38,7 @@ export class PokemonList extends Component {
           changePage={changePage}
           isLoading={isLoading}
         />
-        <ul className={`${styles.container}`}>
+        <ul className={`${styles.list}`}>
           {pages[page] && Object.values(items).filter(item => (
             pages[page].includes(item.id))).map(item => (
               <PokemonItem key={item.id + item.name} {...item} handleModal={showModal} />
@@ -52,7 +52,12 @@ export class PokemonList extends Component {
           </Modal>
         )}
         {hasFailed && (
-          <Modal hideModal={() => itemsHasErrored(false)}>
+          <Modal hideModal={() => {
+            const pagesIdx = Object.keys(pages);
+            changePage(page < 1 ? page + 1 : Number(pagesIdx.pop()));
+            itemsHasErrored(false);
+          }}
+          >
             <Error message={hasFailed} />
           </Modal>
         )}

@@ -2,31 +2,61 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import bs from 'bootstrap/dist/css/bootstrap.min.css';
 import Spinner from '../../../shared/Spinner/Spinner';
+import debounce from '../../../../_utils/debounce';
 
-const Pagination = class Pagination extends Component {
-  handleRequests = (value = 1) => {
+class Pagination extends Component {
+  componentDidUpdate(prevProps) {
+    const { pages } = this.props;
+    if (pages !== prevProps.pages) {
+      this.handleExactPages();
+    }
+  }
+
+  handleRequests = (value = 1, exact) => {
     const {
       pages,
       page,
       changePage,
       getListRequest,
     } = this.props;
-
-    if (pages[page + value]) {
-      changePage(page + value);
+    // Handle change to exact page or next / prev page
+    const check = exact ? value : page + value;
+    // Handle page to already fetched page
+    if (pages[check]) {
+      changePage(check);
+      // Handle new fetch for a page
     } else {
-      getListRequest(page + value);
+      changePage(check);
+      debounce(getListRequest, [check], 350);
     }
+    return null;
+  };
+
+  handleExactPages = () => {
+    const { pages } = this.props;
+    // Get higher page index in case that some pages are missing thanks to debounced fetch for pages
+    const max = Math.max(...Object.keys(pages));
+    const items = [];
+    // Populate items array with sequential values up to highest already fetched page index
+    for (let i = 1; i <= max; i += 1) {
+      items.push(i);
+    }
+    return items;
   };
 
   render() {
-    const { isLoading } = this.props;
+    const { isLoading, page } = this.props;
     return (
       <nav>
-        <ul className={bs.pagination}>
+        <ul className={`${bs.pagination} ${bs['justify-content-center']}`}>
           <li className={bs['page-item']}>
-            <button className={bs['page-link']} type="button" onClick={() => this.handleRequests(-1)}>Previous</button>
+            <button className={bs['page-link']} disabled={page <= 1} type="button" onClick={() => this.handleRequests(-1)}>Previous</button>
           </li>
+          {this.handleExactPages().map(idx => (
+            <li key={idx} className={bs['page-item']}>
+              <button className={bs['page-link']} type="button" onClick={() => this.handleRequests(idx, true)}>{idx}</button>
+            </li>
+          ))}
           <li className={bs['page-item']}>
             <button className={bs['page-link']} type="button" onClick={() => this.handleRequests(1)}>Next</button>
           </li>
@@ -41,7 +71,7 @@ const Pagination = class Pagination extends Component {
       </nav>
     );
   }
-};
+}
 
 Pagination.defaultProps = {
   pages: {},
