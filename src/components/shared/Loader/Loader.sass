@@ -1,0 +1,28 @@
+.container
+  height: 100%
+  width: 100%
+  display: flex
+  position: absolute
+  justify-content: center
+  align-items: center
+.dot
+  --time: 1s
+  width: 15px
+  height: 15px
+  margin: 5px
+  border-radius: 50%
+  background: rgba(0,0,0,0.3)
+  &:first-child
+    animation: flash var(--time) infinite
+  &:nth-child(2)
+    animation: flash var(--time) infinite calc(var(--time) / 3)
+  &:last-child
+    animation: flash var(--time) infinite calc(var(--time) / 1.5)
+
+@keyframes flash
+  0%
+    background: rgba(0,0,0,0.3)
+  50%
+    background: rgba(0,0,0,0.9)
+  100%
+    background: rgba(0,0,0,0.3)

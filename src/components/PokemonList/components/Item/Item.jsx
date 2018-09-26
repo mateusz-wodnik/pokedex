@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import bs from 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './Item.sass';
 import Type from '../../../shared/Type/Type';
+import LazyImg from '../../../shared/LazyImg/LazyImg';
 
 const PokemonItem = ({
   id,
@@ -15,7 +16,7 @@ const PokemonItem = ({
 }) => (
   <li id={id} className={`${styles.container} ${bs.card}`}>
     <a href={`/#${id}`} className={styles.img} onClick={() => handleModal(id)}>
-      <img className={`${bs['card-img-top']}`} src={img} alt={name} />
+      <LazyImg className={bs['card-img-top']} src={img} alt={name} />
     </a>
     <div className={`${styles.body} ${bs['card-body']}`}>
       <h5 className={`${styles.title} ${bs['card-title']}`}>{`#${num} ${name}`}</h5>
