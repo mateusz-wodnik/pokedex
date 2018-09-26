@@ -80,7 +80,7 @@ PokemonList.defaultProps = {
   pages: {},
   page: 1,
   limit: 16,
-  hasFailed: false,
+  hasFailed: null,
   itemsHasErrored: () => false,
   isLoading: false,
 };

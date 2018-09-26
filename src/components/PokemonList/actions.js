@@ -13,9 +13,9 @@ export const createList = items => ({
   items,
 });
 
-export const itemsHasErrored = bool => ({
+export const itemsHasErrored = message => ({
   type: FAILED_POKEMON_LIST,
-  hasFailed: bool,
+  hasFailed: message,
 });
 
 export const itemsIsLoading = bool => ({
@@ -34,10 +34,16 @@ export const changePage = page => ({
   page,
 });
 
+/**
+ * Fetch pokemons list by page
+ * @param page - number
+ * @param limit - number
+ * @returns {Function}
+ */
 export function getListRequest(page, limit = 16) {
   return (dispatch) => {
     /* Reset error message on new request */
-    dispatch(itemsHasErrored(false));
+    dispatch(itemsHasErrored(null));
     /* Handle requests for pages lower than page index 1 */
     if (page < 1) return dispatch(itemsHasErrored('No more pokemons found'));
     dispatch(itemsIsLoading(true));

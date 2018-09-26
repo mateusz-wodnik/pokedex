@@ -13,13 +13,14 @@ import {
 
 export const initialState = {
   items: {},
-  hasFailed: false,
+  hasFailed: null,
   isLoading: false,
   modal: false,
   pages: {},
   page: 1,
 };
 
+// Handle all pokemon items in a dictionary
 export function items(state = initialState.items, action) {
   switch (action.type) {
     case ADD_POKEMON_LIST:
@@ -29,7 +30,7 @@ export function items(state = initialState.items, action) {
       return state;
   }
 }
-
+// Handle fetch error
 export function hasFailed(state = initialState.hasFailed, action) {
   switch (action.type) {
     case FAILED_POKEMON_LIST:
@@ -39,7 +40,7 @@ export function hasFailed(state = initialState.hasFailed, action) {
       return state;
   }
 }
-
+// Handle fetch loading state
 export function isLoading(state = initialState.isLoading, action) {
   switch (action.type) {
     case LOADING_POKEMON_LIST:
@@ -49,7 +50,7 @@ export function isLoading(state = initialState.isLoading, action) {
       return state;
   }
 }
-
+// Handle fetched pages and store each page items ids in dictionary
 export function pages(state = initialState.pages, action) {
   switch (action.type) {
     case ADD_PAGE:
@@ -59,7 +60,7 @@ export function pages(state = initialState.pages, action) {
       return state;
   }
 }
-
+// Keep actual page number displayed in UI
 export function page(state = initialState.page, action) {
   switch (action.type) {
     case CHANGE_PAGE:
@@ -69,7 +70,7 @@ export function page(state = initialState.page, action) {
       return state;
   }
 }
-
+// Handle pokemon modal display
 export function modal(state = initialState.modal, action) {
   switch (action.type) {
     case SHOW_MODAL:
