@@ -6,6 +6,8 @@ import {
   FAILED_POKEMON_LIST,
   SHOW_MODAL,
   HIDE_MODAL,
+  ADD_PAGE,
+  CHANGE_PAGE,
 } from './actions';
 
 
@@ -14,6 +16,8 @@ export const initialState = {
   hasFailed: false,
   isLoading: false,
   modal: false,
+  pages: {},
+  page: 1,
 };
 
 export function items(state = initialState.items, action) {
@@ -46,6 +50,26 @@ export function isLoading(state = initialState.isLoading, action) {
   }
 }
 
+export function pages(state = initialState.pages, action) {
+  switch (action.type) {
+    case ADD_PAGE:
+      return { ...state, [action.page]: action.ids };
+
+    default:
+      return state;
+  }
+}
+
+export function page(state = initialState.page, action) {
+  switch (action.type) {
+    case CHANGE_PAGE:
+      return action.page;
+
+    default:
+      return state;
+  }
+}
+
 export function modal(state = initialState.modal, action) {
   switch (action.type) {
     case SHOW_MODAL:
@@ -63,5 +87,7 @@ export default combineReducers({
   items,
   hasFailed,
   isLoading,
+  pages,
+  page,
   modal,
 });

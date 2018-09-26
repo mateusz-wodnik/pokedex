@@ -6,20 +6,23 @@ import styles from './PokemonList.sass';
 import PokemonItem from './components/Item/Item';
 import Modal from '../shared/Modal/Modal';
 import Info from './components/Info/Info';
-
+import Pagination from './components/Pagination/Pagination';
 
 export class PokemonList extends Component {
   componentDidMount() {
-    const { getListRequest } = this.props;
-    getListRequest();
+    const { getListRequest, page } = this.props;
+    getListRequest(page);
   }
 
   render() {
     const {
       items,
+      pages,
+      page,
       modal,
       showModal,
       hideModal,
+      getListRequest,
     } = this.props;
 
     const handleModal = () => {
@@ -38,8 +41,11 @@ export class PokemonList extends Component {
 
     return (
       <Fragment>
+        <Pagination page={page} getListRequest={getListRequest} />
         <ul className={`${styles.container}`}>
-          {items.map(item => (
+          {items.filter(item => (
+            pages[page] && pages[page].includes(item.id)
+          )).map(item => (
             <PokemonItem key={item.id + item.name} {...item} handleModal={showModal} />
           ))}
         </ul>
@@ -52,11 +58,17 @@ export class PokemonList extends Component {
 PokemonList.defaultProps = {
   items: [],
   getListRequest: () => [],
+  pages: {},
+  page: 1,
+  limit: 16,
 };
 
 PokemonList.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
   getListRequest: PropTypes.func,
+  pages: PropTypes.objectOf(PropTypes.array),
+  page: PropTypes.number,
+  limit: PropTypes.number,
 };
 
 function mapStateToProps(state) {
