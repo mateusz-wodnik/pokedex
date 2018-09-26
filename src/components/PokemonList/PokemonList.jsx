@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from './actions';
@@ -27,48 +27,42 @@ export class PokemonList extends Component {
       changePage,
       hasFailed,
       itemsHasErrored,
+      isLoading,
     } = this.props;
-
-    const handleModal = () => {
-      if (modal) {
-        const pokemon = items.find(item => item.id === modal);
-        return (
-          <Modal hideModal={hideModal} link={`/#${modal}`}>
-            <PokemonItem {...pokemon} handleModal={hideModal}>
-              <Info {...pokemon} />
-            </PokemonItem>
-          </Modal>
-        );
-      }
-      return null;
-    };
-
     return (
-      <Fragment>
+      <div>
         <Pagination
           pages={pages}
           page={page}
           getListRequest={getListRequest}
           changePage={changePage}
+          isLoading={isLoading}
         />
         <ul className={`${styles.container}`}>
-          {pages[page] && items.filter(item => pages[page].includes(item.id)).map(item => (
-            <PokemonItem key={item.id + item.name} {...item} handleModal={showModal} />
+          {pages[page] && Object.values(items).filter(item => (
+            pages[page].includes(item.id))).map(item => (
+              <PokemonItem key={item.id + item.name} {...item} handleModal={showModal} />
           ))}
         </ul>
-        {handleModal()}
+        {modal && (
+          <Modal hideModal={hideModal} link={`/#${modal}`}>
+            <PokemonItem {...items[modal]} handleModal={hideModal}>
+              <Info {...items[modal]} />
+            </PokemonItem>
+          </Modal>
+        )}
         {hasFailed && (
           <Modal hideModal={() => itemsHasErrored(false)}>
             <Error message={hasFailed} />
           </Modal>
         )}
-      </Fragment>
+      </div>
     );
   }
 }
 
 PokemonList.defaultProps = {
-  items: [],
+  items: {},
   getListRequest: () => [],
   changePage: () => null,
   pages: {},
@@ -76,10 +70,11 @@ PokemonList.defaultProps = {
   limit: 16,
   hasFailed: false,
   itemsHasErrored: () => false,
+  isLoading: false,
 };
 
 PokemonList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object),
+  items: PropTypes.objectOf(PropTypes.object),
   getListRequest: PropTypes.func,
   changePage: PropTypes.func,
   pages: PropTypes.objectOf(PropTypes.array),
@@ -87,12 +82,12 @@ PokemonList.propTypes = {
   limit: PropTypes.number,
   hasFailed: PropTypes.string,
   itemsHasErrored: PropTypes.func,
+  isLoading: PropTypes.bool,
 };
 
 function mapStateToProps(state) {
   return {
     ...state.pokemons,
-    items: Object.values(state.pokemons.items),
   };
 }
 

@@ -1,3 +1,4 @@
+import arrToDict from '../../_utils/arrayToDictionary';
 export const ADD_POKEMON_LIST = 'ADD_POKEMON_LIST';
 export const FAILED_POKEMON_LIST = 'FAILED_POKEMON_LIST';
 export const LOADING_POKEMON_LIST = 'LOADING_POKEMON_LIST';
@@ -42,18 +43,13 @@ export function getListRequest(page, limit = 16) {
     return fetch(`/pokemons?_page=${page}&_limit=${limit}`)
       .then((res) => {
         if (!res.ok) throw Error(res.statusText);
-        dispatch(itemsIsLoading(false));
         return res.json();
       })
       .then((pokemons) => {
+        dispatch(itemsIsLoading(false));
         /* Handle requests for pages that returns no items */
         if (!pokemons.length) throw Error('No more pokemons found');
         /* Convert array to dictionary */
-        function arrToDict(arr) {
-          const dict = {};
-          arr.forEach((item) => { dict[item.id] = item; });
-          return dict;
-        }
         const dict = arrToDict(pokemons);
         dispatch(createList(dict));
         const ids = pokemons.map(pokemon => pokemon.id);
