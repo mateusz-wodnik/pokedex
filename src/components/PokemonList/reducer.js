@@ -12,7 +12,7 @@ import {
 
 
 export const initialState = {
-  items: [],
+  items: {},
   hasFailed: false,
   isLoading: false,
   modal: false,
@@ -23,7 +23,7 @@ export const initialState = {
 export function items(state = initialState.items, action) {
   switch (action.type) {
     case ADD_POKEMON_LIST:
-      return [...state, ...action.items];
+      return { ...state, ...action.items };
 
     default:
       return state;

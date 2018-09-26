@@ -34,6 +34,10 @@ export const changePage = page => ({
 
 export function getListRequest(page, limit = 16) {
   return (dispatch) => {
+    /* Reset error message on new request */
+    dispatch(itemsHasErrored(false));
+    /* Handle requests for pages lower than page index 1 */
+    if (page < 1) return dispatch(itemsHasErrored('No more pokemons found'));
     dispatch(itemsIsLoading(true));
     return fetch(`/pokemons?_page=${page}&_limit=${limit}`)
       .then((res) => {
@@ -42,12 +46,21 @@ export function getListRequest(page, limit = 16) {
         return res.json();
       })
       .then((pokemons) => {
-        dispatch(createList(pokemons));
+        /* Handle requests for pages that returns no items */
+        if (!pokemons.length) throw Error('No more pokemons found');
+        /* Convert array to dictionary */
+        function arrToDict(arr) {
+          const dict = {};
+          arr.forEach((item) => { dict[item.id] = item; });
+          return dict;
+        }
+        const dict = arrToDict(pokemons);
+        dispatch(createList(dict));
         const ids = pokemons.map(pokemon => pokemon.id);
         dispatch(addPage(page, ids));
         dispatch(changePage(page));
       })
-      .catch(() => dispatch(itemsHasErrored(true)));
+      .catch(error => dispatch(itemsHasErrored(error.message)));
   };
 }
 

@@ -23,6 +23,7 @@ export class PokemonList extends Component {
       showModal,
       hideModal,
       getListRequest,
+      changePage,
     } = this.props;
 
     const handleModal = () => {
@@ -41,11 +42,14 @@ export class PokemonList extends Component {
 
     return (
       <Fragment>
-        <Pagination page={page} getListRequest={getListRequest} />
+        <Pagination
+          pages={pages}
+          page={page}
+          getListRequest={getListRequest}
+          changePage={changePage}
+        />
         <ul className={`${styles.container}`}>
-          {items.filter(item => (
-            pages[page] && pages[page].includes(item.id)
-          )).map(item => (
+          {pages[page] && items.filter(item => pages[page].includes(item.id)).map(item => (
             <PokemonItem key={item.id + item.name} {...item} handleModal={showModal} />
           ))}
         </ul>
@@ -58,6 +62,7 @@ export class PokemonList extends Component {
 PokemonList.defaultProps = {
   items: [],
   getListRequest: () => [],
+  changePage: () => null,
   pages: {},
   page: 1,
   limit: 16,
@@ -66,13 +71,17 @@ PokemonList.defaultProps = {
 PokemonList.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
   getListRequest: PropTypes.func,
+  changePage: PropTypes.func,
   pages: PropTypes.objectOf(PropTypes.array),
   page: PropTypes.number,
   limit: PropTypes.number,
 };
 
 function mapStateToProps(state) {
-  return { ...state.pokemons };
+  return {
+    ...state.pokemons,
+    items: Object.values(state.pokemons.items),
+  };
 }
 
 export default connect(mapStateToProps, { ...actions })(PokemonList);
