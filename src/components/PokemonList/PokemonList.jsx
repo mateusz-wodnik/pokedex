@@ -56,6 +56,13 @@ export class PokemonList extends Component {
             <Error message={hasFailed} />
           </Modal>
         )}
+        <Pagination
+          pages={pages}
+          page={page}
+          getListRequest={getListRequest}
+          changePage={changePage}
+          isLoading={isLoading}
+        />
       </main>
     );
   }

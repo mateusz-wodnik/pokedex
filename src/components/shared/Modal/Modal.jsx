@@ -1,9 +1,10 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Modal.sass';
 
 export const Modal = ({ children, link, hideModal }) => (
-  <aside className={styles.container}>
+  <aside className={styles.container} tabIndex={1}>
     <div className={styles.wrapper}>
       <a href={link} className={styles.close} onClick={hideModal}>✘</a>
       {children}
