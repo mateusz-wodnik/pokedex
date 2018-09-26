@@ -17,7 +17,7 @@ describe('async actions', () => {
     fetch.once(JSON.stringify(mock));
 
     const expectedActions = [
-      itemsHasErrored(false),
+      itemsHasErrored(null),
       itemsIsLoading(true),
       itemsIsLoading(false),
       createList(arrToDict(mock)),
