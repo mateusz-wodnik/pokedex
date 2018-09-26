@@ -1,6 +1,7 @@
 import reducer, { items, hasFailed, isLoading, initialState, modal } from './reducer';
 import { createList, itemsIsLoading, itemsHasErrored, showModal, hideModal } from './actions';
 import mock from './mock.data.json';
+import arrToDict from '../../_utils/arrayToDictionary';
 
 describe('Pokemon list reducer', () => {
   it('should return the initial state', () => {
@@ -16,7 +17,7 @@ describe('Pokemon list reducer', () => {
   });
 
   it('should handle ADD_POKEMON_LIST', () => {
-    expect(items([], createList(mock))).toEqual(mock);
+    expect(items([], createList(arrToDict(mock)))).toEqual(arrToDict(mock));
   });
 
   it('should show modal', () => {

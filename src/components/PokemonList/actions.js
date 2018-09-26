@@ -1,4 +1,5 @@
 import arrToDict from '../../_utils/arrayToDictionary';
+
 export const ADD_POKEMON_LIST = 'ADD_POKEMON_LIST';
 export const FAILED_POKEMON_LIST = 'FAILED_POKEMON_LIST';
 export const LOADING_POKEMON_LIST = 'LOADING_POKEMON_LIST';

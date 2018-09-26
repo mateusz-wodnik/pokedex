@@ -30,7 +30,7 @@ export class PokemonList extends Component {
       isLoading,
     } = this.props;
     return (
-      <div>
+      <main>
         <Pagination
           pages={pages}
           page={page}
@@ -56,7 +56,7 @@ export class PokemonList extends Component {
             <Error message={hasFailed} />
           </Modal>
         )}
-      </div>
+      </main>
     );
   }
 }

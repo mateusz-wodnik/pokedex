@@ -21,6 +21,6 @@ describe('Pokemon list component', () => {
   });
 
   it('contains right number of pokemon items', () => {
-    expect(wrapper.find('PokemonItem')).toHaveLength(items.length);
+    expect(wrapper.find('PokemonItem').toHaveLength(items.length));
   });
 });
