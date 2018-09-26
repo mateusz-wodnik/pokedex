@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import * as actions from './actions';
 import styles from './PokemonList.sass';
 import PokemonItem from './components/Item/Item';
-import Modal from '../shared/Modal/Modal';
 import Info from './components/Info/Info';
 import Pagination from './components/Pagination/Pagination';
+import Modal from '../shared/Modal/Modal';
+import Error from '../shared/Error/Error';
 
 export class PokemonList extends Component {
   componentDidMount() {
@@ -24,6 +25,8 @@ export class PokemonList extends Component {
       hideModal,
       getListRequest,
       changePage,
+      hasFailed,
+      itemsHasErrored,
     } = this.props;
 
     const handleModal = () => {
@@ -54,6 +57,11 @@ export class PokemonList extends Component {
           ))}
         </ul>
         {handleModal()}
+        {hasFailed && (
+          <Modal hideModal={() => itemsHasErrored(false)}>
+            <Error message={hasFailed} />
+          </Modal>
+        )}
       </Fragment>
     );
   }
@@ -66,6 +74,8 @@ PokemonList.defaultProps = {
   pages: {},
   page: 1,
   limit: 16,
+  hasFailed: false,
+  itemsHasErrored: () => false,
 };
 
 PokemonList.propTypes = {
@@ -75,6 +85,8 @@ PokemonList.propTypes = {
   pages: PropTypes.objectOf(PropTypes.array),
   page: PropTypes.number,
   limit: PropTypes.number,
+  hasFailed: PropTypes.string,
+  itemsHasErrored: PropTypes.func,
 };
 
 function mapStateToProps(state) {
