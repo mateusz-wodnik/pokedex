@@ -24,7 +24,7 @@ This app was developed using:
 * json-server (https://www.npmjs.com/package/json-server)
 
 ```bash
-# To install dev-dependencies, just go to the root folder and run
+# To install dependencies, just go to the root folder and run
 npm i
 
 # To run dev version run
@@ -34,8 +34,6 @@ npm run start
 npm run build
 
 # To run production version run
-"production": "json-server server/pokemon.data.json --static ./build"
-
-# To run dev version run
-npm run start
+npm run build
+npm run production
 ```
