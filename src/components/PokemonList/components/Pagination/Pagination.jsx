@@ -49,7 +49,7 @@ class Pagination extends Component {
     return (
       <nav>
         <ul className={`${bs.pagination} ${bs['justify-content-center']}`}>
-          <li className={bs['page-item']}>
+          <li className={`${bs['page-item']} ${page <= 1 && bs.disabled}`}>
             <button className={bs['page-link']} disabled={page <= 1} type="button" onClick={() => this.handleRequests(-1)}>Previous</button>
           </li>
           {this.handleExactPages().map(idx => (
